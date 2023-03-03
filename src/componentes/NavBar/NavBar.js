@@ -3,26 +3,23 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { CartWidget } from "../CartWidget/CartWidget";
+import { Link } from "react-router-dom";
 
 const NavBarComp = () => {
   return (
     <>
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">Ecommerce</Navbar.Brand>
+          <Link to="/">Ecommerce</Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#contacto">Contacto</Nav.Link>
               <NavDropdown title="Productos" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">
-                  celulares
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">tablets</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  televisores
-                </NavDropdown.Item>
+                <Link to="/category/celulares">celulares</Link>
+                <Link to="/category/tablets">tablets</Link>
+                <Link to="/category/televisores">televisores</Link>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

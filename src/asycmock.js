@@ -32,6 +32,22 @@ export const getProducts = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(products);
-    }, 2000);
+    }, 1000);
+  });
+};
+
+export const getProductsById = (id) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(products.find((prod) => prod.id === id));
+    }, 1000);
+  });
+};
+
+export const getProductsByCategory = (categoryid) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(products.filter((prod) => prod.category === categoryid));
+    }, 1000);
   });
 };
