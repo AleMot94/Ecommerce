@@ -2,8 +2,8 @@ import "./App.css";
 import NavBarComp from "./componentes/NavBar/NavBar";
 import ItemListContainer from "./componentes/ItemListContainer/ItemListContainer";
 //import { Counter } from "./componentes/Counter/Counter";
-//import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CartProvider } from "./context/CartContext";
 import ItemDetailConteiner from "./componentes/ItemDetailConteiner/ItemDetailConteiner";
 
 function App() {
@@ -27,17 +27,26 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <NavBarComp />
-        <Routes>
-          <Route path="/" element={<ItemListContainer titulo="ECOMMERCE" />} />
-          <Route
-            path="/category/:categoryid"
-            element={<ItemListContainer titulo="ECOMMERCE" />}
-          />
-          <Route path="/detail/:productid" element={<ItemDetailConteiner />} />
-        </Routes>
-      </BrowserRouter>
+      <CartProvider>
+        <BrowserRouter>
+          <NavBarComp />
+          <Routes>
+            <Route
+              path="/"
+              element={<ItemListContainer titulo="ECOMMERCE" />}
+            />
+            <Route
+              path="/category/:categoryid"
+              element={<ItemListContainer titulo="ECOMMERCE" />}
+            />
+            <Route
+              path="/detail/:productid"
+              element={<ItemDetailConteiner />}
+            />
+            <Route path="/cart" element={<h1>cart</h1>}></Route>
+          </Routes>
+        </BrowserRouter>
+      </CartProvider>
     </div>
   );
 }

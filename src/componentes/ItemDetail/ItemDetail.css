@@ -1,0 +1,14 @@
+.conteinerItemDetail {
+    display: flex;
+    justify-content: space-around;
+}
+
+.imgItemDetail {
+    width: 500px;
+    height: 500px;
+    margin-left: 150px;
+}
+
+.cardDetail {
+    margin-right: 300pxs;
+}
