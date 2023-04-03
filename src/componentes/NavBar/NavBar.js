@@ -16,7 +16,11 @@ const NavBarComp = () => {
             <Nav className="me-auto">
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#contacto">Contacto</Nav.Link>
-              <NavDropdown title="Productos" id="basic-nav-dropdown">
+              <NavDropdown
+                className={{}}
+                title="Productos"
+                id="basic-nav-dropdown"
+              >
                 <Link to="/category/celulares">celulares</Link>
                 <Link to="/category/tablets">tablets</Link>
                 <Link to="/category/televisores">televisores</Link>
