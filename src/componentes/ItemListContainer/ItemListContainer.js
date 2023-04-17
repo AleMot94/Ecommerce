@@ -1,7 +1,9 @@
-import { getProducts, getProductsByCategory } from "../../asycmock";
+//import { getProducts, getProductsByCategory } from "../../asycmock";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ItemList from "../ItemList/ItemList";
+import { getDocs, collection, query, where } from "firebase/firestore";
+import { bd } from "../../service/firebase";
 
 const ItemListContainer = (props) => {
   const [products, setProduct] = useState([]);
@@ -12,7 +14,27 @@ const ItemListContainer = (props) => {
   useEffect(() => {
     setLoading(true);
 
-    if (!categoryid) {
+    // se conecta a la base de datos en firebase filtrando con la categoria del producto
+    const collectionRef = categoryid
+      ? query(collection(bd, "products"), where("category", "==", categoryid))
+      : collection(bd, "products");
+
+    // obtiene los documentos de firebase ()
+    getDocs(collectionRef)
+      .then((response) => {
+        const producsFirestore = response.docs.map((doc) => {
+          return { id: doc.id, ...doc.data() };
+        });
+        setProduct(producsFirestore);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
+    /*if (!categoryid) {
       getProducts()
         .then((response) => {
           setProduct(response);
@@ -34,7 +56,7 @@ const ItemListContainer = (props) => {
         .finally(() => {
           setLoading(false);
         });
-    }
+    }*/
   }, [categoryid]);
 
   if (loading) {

@@ -3,8 +3,11 @@ import CartContext from "../../context/CartContext";
 import CartDeatil from "../CartDetail/CartDetail";
 
 const CartList = () => {
-  const { cart, totalPrice, cleanCart } = useContext(CartContext);
+  const { cart, totalPrice, cleanCart, handleObjOrder } =
+    useContext(CartContext);
+
   const total = totalPrice();
+
   return (
     <div>
       <h1>carrito de compras</h1>
@@ -22,7 +25,9 @@ const CartList = () => {
         >
           limpiar carrito
         </button>
-        <button>comprar</button>
+        <button onClick={handleObjOrder}>comprar</button>
+
+        {/*<button onClick={updatePrecio}>update precio</button>*/}
       </div>
     </div>
   );
