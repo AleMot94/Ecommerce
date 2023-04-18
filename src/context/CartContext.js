@@ -80,10 +80,6 @@ export const CartProvider = ({ children }) => {
       item: cart,
       total: total,
     };
-    /*const docRef = collection(bd, "orders");
-    addDoc(docRef, objOrder).then(({ id }) => {
-      console.log(id);
-    });*/
 
     const batch = writeBatch(bd);
     const ids = cart.map((prod) => prod.id);

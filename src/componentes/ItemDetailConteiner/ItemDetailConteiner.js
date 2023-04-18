@@ -1,37 +1,34 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { getProduct } from "../../service/firebase/firestore";
+import { useData } from "../../hooks/dataRenderProd";
 
 const ItemDetailConteiner = () => {
-  const [product, setProduct] = useState();
   const { productid } = useParams();
-  const { loading, setLoading } = useState(true);
 
-  useEffect(() => {
-    getProduct(productid)
-      .then((response) => {
-        setProduct(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-    /*getProductsById(params.productid).then((response) => {
-      setProduct(response);
-    });*/
-  }, [productid]);
+  const { isLoadong, data, error } = useData(
+    () => getProduct(productid),
+    [productid]
+  );
 
-  if (loading) {
+  if (isLoadong) {
     return <h1>cargando...</h1>;
   }
+
+  if (error) {
+    return <h1>Hubo un error</h1>;
+  }
+
+  const dataKeys = Object.keys(data);
 
   return (
     <>
       <h1>detalle del producto</h1>
-      <ItemDetail {...product} />
+      {dataKeys.length > 0 ? (
+        <ItemDetail {...data} />
+      ) : (
+        <h1>No hay producto</h1>
+      )}
     </>
   );
 };
