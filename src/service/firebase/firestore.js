@@ -22,3 +22,10 @@ export const getProducts = (categoryid) => {
       });
   });
 };
+/*
+export const getProduct = (docRef) => {
+  getDoc(docRef).then((doc) => {
+    const productFirestore = { id: doc.id, ...doc.data() };
+    resolve(productFirestore);
+  });
+};*/
