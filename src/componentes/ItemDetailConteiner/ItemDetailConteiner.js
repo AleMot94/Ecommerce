@@ -1,31 +1,32 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "../ItemDetail/ItemDetail";
-import { getDoc, doc } from "firebase/firestore";
-import { bd } from "../../service/firebase";
+import { getProduct } from "../../service/firebase/firestore";
 
 const ItemDetailConteiner = () => {
   const [product, setProduct] = useState();
-
-  const params = useParams();
+  const { productid } = useParams();
+  const { loading, setLoading } = useState(true);
 
   useEffect(() => {
-    // se conecta al producto con el id en firebase
-    const docRef = doc(bd, "products", params.productid);
-
-    //obtiene el producto de firebase
-    getDoc(docRef)
-      .then((doc) => {
-        const productFirestore = { id: doc.id, ...doc.data() };
-        setProduct(productFirestore);
+    getProduct(productid)
+      .then((response) => {
+        setProduct(response);
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
     /*getProductsById(params.productid).then((response) => {
       setProduct(response);
     });*/
-  }, [params.productid]);
+  }, [productid]);
+
+  if (loading) {
+    return <h1>cargando...</h1>;
+  }
 
   return (
     <>

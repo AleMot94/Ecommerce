@@ -117,6 +117,7 @@ export const CartProvider = ({ children }) => {
       })
       .then(({ id }) => {
         batch.commit();
+        console.log(id);
       })
       .catch((error) => {
         if (error.type === "fuera_de_stock") {

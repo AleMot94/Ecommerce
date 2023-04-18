@@ -1,7 +1,15 @@
-import { getDocs, collection, query, where } from "firebase/firestore";
+import {
+  getDoc,
+  getDocs,
+  doc,
+  collection,
+  query,
+  where,
+} from "firebase/firestore";
 import { bd } from ".";
 import { adapterProductFromFirestore } from "../../adapters/productAdapter";
 
+/////////////////////////////////////////////////////
 export const getProducts = (categoryid) => {
   return new Promise((resolve, reject) => {
     // se conecta a la base de datos en firebase filtrando con la categoria del producto
@@ -22,10 +30,22 @@ export const getProducts = (categoryid) => {
       });
   });
 };
-/*
-export const getProduct = (docRef) => {
-  getDoc(docRef).then((doc) => {
-    const productFirestore = { id: doc.id, ...doc.data() };
-    resolve(productFirestore);
+
+//////////////////////////////////////////////////
+
+export const getProduct = (productid) => {
+  return new Promise((resolve, reject) => {
+    const docRef = doc(bd, "products", productid);
+
+    getDoc(docRef)
+      .then((doc) => {
+        const productFirestore = { id: doc.id, ...doc.data() };
+        resolve(productFirestore);
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
-};*/
+};
+
+//////////////////////////////////////////////////
