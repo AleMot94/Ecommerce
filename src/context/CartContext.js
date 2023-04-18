@@ -1,5 +1,13 @@
 import { createContext, useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  writeBatch,
+  getDocs,
+  query,
+  where,
+  documentId,
+} from "firebase/firestore";
 import { bd } from "../service/firebase";
 
 const CartContext = createContext();
@@ -72,10 +80,51 @@ export const CartProvider = ({ children }) => {
       item: cart,
       total: total,
     };
-    const docRef = collection(bd, "orders");
+    /*const docRef = collection(bd, "orders");
     addDoc(docRef, objOrder).then(({ id }) => {
       console.log(id);
-    });
+    });*/
+
+    const batch = writeBatch(bd);
+    const ids = cart.map((prod) => prod.id);
+    const collectionRef = collection(bd, "products");
+    const fueraDeStock = [];
+
+    getDocs(query(collectionRef, where(documentId(), "in", ids)))
+      .then((response) => {
+        response.docs.forEach((doc) => {
+          const dataDoc = doc.data();
+          const prod = cart.find((prod) => prod.id === doc.id);
+          const cantidadProd = prod.cantidad;
+
+          if (dataDoc.stock >= cantidadProd) {
+            batch.update(doc.ref, { stock: dataDoc.stock - cantidadProd });
+          } else {
+            fueraDeStock.push({ id: doc.id, ...dataDoc });
+          }
+        });
+      })
+      .then(() => {
+        if (fueraDeStock.length === 0) {
+          const collectionRef = collection(bd, "orders");
+          return addDoc(collectionRef, objOrder);
+        } else {
+          return Promise.reject({
+            type: "fuera_de_stock",
+            products: fueraDeStock,
+          });
+        }
+      })
+      .then(({ id }) => {
+        batch.commit();
+      })
+      .catch((error) => {
+        if (error.type === "fuera_de_stock") {
+          console.log("hay productos que no tienen stock");
+        } else {
+          console.log(error);
+        }
+      });
   };
 
   // ejemplo para actualizar datos de los productos en el back de firebase
