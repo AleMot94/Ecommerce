@@ -1,10 +1,10 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import CartContext from "../../context/CartContext";
 import CartDeatil from "../CartDetail/CartDetail";
 
 const CartList = () => {
-  const { cart, totalPrice, cleanCart, handleObjOrder } =
-    useContext(CartContext);
+  const { cart, totalPrice, cleanCart } = useContext(CartContext);
 
   const total = totalPrice();
 
@@ -25,7 +25,9 @@ const CartList = () => {
         >
           limpiar carrito
         </button>
-        <button onClick={handleObjOrder}>comprar</button>
+        <Link to="/checkout">
+          <button>finalizar compra</button>
+        </Link>
 
         {/*<button onClick={updatePrecio}>update precio</button>*/}
       </div>

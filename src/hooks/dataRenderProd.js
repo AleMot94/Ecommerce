@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 export const useData = (asyncFn, dependencies = []) => {
   const [data, setData] = useState();
   const [error, setError] = useState();
-  const [isLoadong, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setIsLoading(true);
 
@@ -20,7 +20,7 @@ export const useData = (asyncFn, dependencies = []) => {
   }, dependencies);
 
   return {
-    isLoadong,
+    isLoading,
     data,
     error,
   };

@@ -1,14 +1,4 @@
 import { createContext, useState } from "react";
-import {
-  addDoc,
-  collection,
-  writeBatch,
-  getDocs,
-  query,
-  where,
-  documentId,
-} from "firebase/firestore";
-import { bd } from "../service/firebase";
 
 const CartContext = createContext();
 
@@ -66,70 +56,6 @@ export const CartProvider = ({ children }) => {
     setCart([]);
   };
 
-  // envia la orden de compra al back de firebase
-  const handleObjOrder = () => {
-    console.log("generar orden de compra");
-    const total = totalPrice();
-    const objOrder = {
-      buyer: {
-        name: "alguien",
-        telefono: 12345567,
-        direccion: "av siempre viva 123",
-        mail: "estemailnoesfalso@hotmail.com",
-      },
-      item: cart,
-      total: total,
-    };
-
-    const batch = writeBatch(bd);
-    const ids = cart.map((prod) => prod.id);
-    const collectionRef = collection(bd, "products");
-    const fueraDeStock = [];
-
-    getDocs(query(collectionRef, where(documentId(), "in", ids)))
-      .then((response) => {
-        response.docs.forEach((doc) => {
-          const dataDoc = doc.data();
-          const prod = cart.find((prod) => prod.id === doc.id);
-          const cantidadProd = prod.cantidad;
-
-          if (dataDoc.stock >= cantidadProd) {
-            batch.update(doc.ref, { stock: dataDoc.stock - cantidadProd });
-          } else {
-            fueraDeStock.push({ id: doc.id, ...dataDoc });
-          }
-        });
-      })
-      .then(() => {
-        if (fueraDeStock.length === 0) {
-          const collectionRef = collection(bd, "orders");
-          return addDoc(collectionRef, objOrder);
-        } else {
-          return Promise.reject({
-            type: "fuera_de_stock",
-            products: fueraDeStock,
-          });
-        }
-      })
-      .then(({ id }) => {
-        batch.commit();
-        console.log(id);
-      })
-      .catch((error) => {
-        if (error.type === "fuera_de_stock") {
-          console.log("hay productos que no tienen stock");
-        } else {
-          console.log(error);
-        }
-      });
-  };
-
-  // ejemplo para actualizar datos de los productos en el back de firebase
-  /*const updatePrecio = () => {
-    const docRef = doc(bd, "products", "5FIuFZr2WUY3khPSNWQM");
-
-    updateDoc(docRef, { precio: 1000 });
-  };*/
   // CARTLIST.JS
 
   return (
@@ -141,7 +67,6 @@ export const CartProvider = ({ children }) => {
         remuve,
         totalPrice,
         cleanCart,
-        handleObjOrder,
       }}
     >
       {children}

@@ -6,12 +6,12 @@ import { useData } from "../../hooks/dataRenderProd";
 const ItemDetailConteiner = () => {
   const { productid } = useParams();
 
-  const { isLoadong, data, error } = useData(
+  const { isLoading, data, error } = useData(
     () => getProduct(productid),
     [productid]
   );
 
-  if (isLoadong) {
+  if (isLoading) {
     return <h1>cargando...</h1>;
   }
 

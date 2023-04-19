@@ -6,13 +6,13 @@ import { useData } from "../../hooks/dataRenderProd";
 const ItemListContainer = (props) => {
   const { categoryid } = useParams();
 
-  const { isLoadong, data, error } = useData(
+  const { isLoading, data, error } = useData(
     () => getProducts(categoryid),
     [categoryid]
   );
 
-  if (isLoadong) {
-    return <h1>cargando...</h1>;
+  if (isLoading) {
+    return <h1>Loading...</h1>;
   }
 
   if (error) {

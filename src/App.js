@@ -6,6 +6,7 @@ import CartList from "./componentes/CartList/CartList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
 import ItemDetailConteiner from "./componentes/ItemDetailConteiner/ItemDetailConteiner";
+import Checkout from "./componentes/Checkout/Checkout";
 
 function App() {
   /* EJEMPLO DEL CONTADOR 
@@ -45,6 +46,7 @@ function App() {
               element={<ItemDetailConteiner />}
             />
             <Route path="/cart" element={<CartList />}></Route>
+            <Route path="/checkout" element={<Checkout />}></Route>
           </Routes>
         </BrowserRouter>
       </CartProvider>
