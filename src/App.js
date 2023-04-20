@@ -9,6 +9,7 @@ import ItemDetailConteiner from "./componentes/ItemDetailConteiner/ItemDetailCon
 import Checkout from "./componentes/Checkout/Checkout";
 import Login from "./componentes/Login/Login";
 import Register from "./componentes/Register/Register";
+import Admin from "./componentes/Admin/Admin";
 import ProtectedRoute from "./componentes/ProtectedRoute/ProtectedRoute";
 
 function App() {
@@ -21,11 +22,7 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={
-                  <ProtectedRoute>
-                    <ItemListContainer titulo="ECOMMERCE" />
-                  </ProtectedRoute>
-                }
+                element={<ItemListContainer titulo="ECOMMERCE" />}
               />
               <Route
                 path="/category/:categoryid"
@@ -39,6 +36,14 @@ function App() {
               <Route path="/checkout" element={<Checkout />}></Route>
               <Route path="/login" element={<Login />}></Route>
               <Route path="/register" element={<Register />}></Route>
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute>
+                    <Admin />
+                  </ProtectedRoute>
+                }
+              ></Route>
             </Routes>
           </BrowserRouter>
         </LoginProvider>
