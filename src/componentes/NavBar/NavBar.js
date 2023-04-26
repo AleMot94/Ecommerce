@@ -5,8 +5,12 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import LoginConatiner from "../LoginContainer/LoginContainer";
 import { CartWidget } from "../CartWidget/CartWidget";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import LoginContext from "../../context/LoginContext";
 
 const NavBarComp = () => {
+  const { user } = useContext(LoginContext);
+
   return (
     <>
       <Navbar bg="light" expand="lg">
@@ -28,11 +32,12 @@ const NavBarComp = () => {
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
-
-          <Link to={"/admin"}>ADMIN</Link>
+          {user && user.email === "alejandro_1031m@hotmail.com" && (
+            <Link to={"/admin"}>ADMIN</Link>
+          )}
         </Container>
+        <LoginConatiner />
         <Link to={"/cart"}>
-          <LoginConatiner />
           <CartWidget />
         </Link>
       </Navbar>

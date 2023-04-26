@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import CartContext from "../../context/CartContext";
+import LoginContext from "../../context/LoginContext";
 import CartDeatil from "../CartDetail/CartDetail";
 
 const CartList = () => {
   const { cart, totalPrice, cleanCart } = useContext(CartContext);
+  const { user } = useContext(LoginContext);
 
   const total = totalPrice();
 
@@ -25,9 +27,15 @@ const CartList = () => {
         >
           limpiar carrito
         </button>
-        <Link to="/checkout">
-          <button>finalizar compra</button>
-        </Link>
+        {user && user.isLoggedIn ? (
+          <Link to="/checkout">
+            <button>finalizar compra</button>
+          </Link>
+        ) : (
+          <Link to="/login">
+            <button>Inicia sesión para finalizar la compra</button>
+          </Link>
+        )}
 
         {/*<button onClick={updatePrecio}>update precio</button>*/}
       </div>

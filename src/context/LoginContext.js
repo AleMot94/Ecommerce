@@ -27,7 +27,7 @@ export const LoginProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      setUser(currentUser ? { ...currentUser, isLoggedIn: true } : null);
       setLoading(false);
     });
 

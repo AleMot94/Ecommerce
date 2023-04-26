@@ -8,7 +8,12 @@ const ProtectedRoute = ({ children }) => {
   if (user.email === "alejandro_1031m@hotmail.com") {
     return <>{children}</>;
   } else {
-    return Navigate("/");
+    try {
+      throw new Error("User not authorized");
+    } catch (error) {
+      console.error(error);
+      return <Navigate to="/" />;
+    }
   }
 };
 
