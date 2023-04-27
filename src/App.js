@@ -11,6 +11,8 @@ import Login from "./componentes/Login/Login";
 import Register from "./componentes/Register/Register";
 import Admin from "./componentes/Admin/Admin";
 import ProtectedRoute from "./componentes/ProtectedRoute/ProtectedRoute";
+import Modificar from "./componentes/Modificar/Modificar";
+import Home from "./componentes/Home/Home";
 
 function App() {
   return (
@@ -20,8 +22,9 @@ function App() {
           <BrowserRouter>
             <NavBarComp />
             <Routes>
+              <Route path="/" element={<Home />} />
               <Route
-                path="/"
+                path="/todos"
                 element={<ItemListContainer titulo="ECOMMERCE" />}
               />
               <Route
@@ -44,6 +47,7 @@ function App() {
                   </ProtectedRoute>
                 }
               ></Route>
+              <Route path="/modificar" element={<Modificar />}></Route>
             </Routes>
           </BrowserRouter>
         </LoginProvider>

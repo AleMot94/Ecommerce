@@ -55,7 +55,6 @@ export const CartProvider = ({ children }) => {
   const cleanCart = () => {
     setCart([]);
   };
-
   // CARTLIST.JS
 
   return (

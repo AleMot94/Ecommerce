@@ -26,6 +26,7 @@ const NavBarComp = () => {
                 title="Productos"
                 id="basic-nav-dropdown"
               >
+                <Link to="/todos">todos</Link>
                 <Link to="/category/celulares">celulares</Link>
                 <Link to="/category/tablets">tablets</Link>
                 <Link to="/category/televisores">televisores</Link>

@@ -1,35 +1,26 @@
-import { collection, addDoc } from "firebase/firestore";
-import { bd, storage } from "../../service/firebase";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useState } from "react";
-import ItemAdminContainer from "../ItemAdminContainer/ItemAdminContainer";
+import { bd, storage } from "../../service/firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const Admin = () => {
+const Modificar = ({ id }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [img, setImg] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [stock, setStock] = useState("");
-  const [img, setImg] = useState("");
 
-  const addProdFirebase = async (e) => {
-    console.log(" se ejecuto la funcion");
-    e.preventDefault();
-    await addDoc(collection(bd, "products"), {
-      name,
-      price,
-      img,
-      category,
-      description,
-      stock,
-    });
+  const updatePrecio = async (id) => {
+    const docRef = doc(bd, "products", id);
+    await updateDoc(docRef, { name, price, img, category, description, stock });
 
-    e.target.name.value = "";
+    /*e.target.name.value = "";
     e.target.price.value = "";
     e.target.img.value = "";
     e.target.category.value = "";
     e.target.description.value = "";
-    e.target.stock.value = "";
+    e.target.stock.value = "";*/
   };
 
   const addImgFireStorage = async (e) => {
@@ -41,9 +32,8 @@ const Admin = () => {
   };
 
   return (
-    <>
-      <h1>cargar productos</h1>
-      <form onSubmit={addProdFirebase}>
+    <div>
+      <form>
         <label htmlFor="name">nombre</label>
         <input
           name="name"
@@ -96,12 +86,10 @@ const Admin = () => {
           value={stock}
           onChange={(e) => setStock(e.target.value)}
         ></input>
-        <button>agregar producto</button>
       </form>
-
-      <ItemAdminContainer />
-    </>
+      <button onClick={updatePrecio(id)}>confirmar modificacion</button>
+    </div>
   );
 };
 
-export default Admin;
+export default Modificar;
