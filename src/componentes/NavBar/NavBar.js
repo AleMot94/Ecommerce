@@ -1,46 +1,62 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import LoginConatiner from "../LoginContainer/LoginContainer";
 import { CartWidget } from "../CartWidget/CartWidget";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import LoginContext from "../../context/LoginContext";
+import Button from "react-bootstrap/Button";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 const NavBarComp = () => {
   const { user } = useContext(LoginContext);
 
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="warning" expand="lg">
         <Container>
-          <Link to="/">Ecommerce</Link>
+          <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#contacto">Contacto</Nav.Link>
-              <NavDropdown
-                className={{}}
+              <Nav.Link href="/">
+                <Button variant="outline-dark">Home</Button>
+              </Nav.Link>
+              <Nav.Link href="/contacto">
+                <Button variant="outline-dark">Contacto</Button>
+              </Nav.Link>
+              <DropdownButton
+                id="dropdown-button-dark-example2"
+                variant="outline-dark"
+                menuVariant="dark"
                 title="Productos"
-                id="basic-nav-dropdown"
+                className="mt-2"
               >
-                <Link to="/todos">todos</Link>
-                <Link to="/category/celulares">celulares</Link>
-                <Link to="/category/tablets">tablets</Link>
-                <Link to="/category/televisores">televisores</Link>
-              </NavDropdown>
+                <Dropdown.Item href="/todos">Todos</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item href="/category/celulares">
+                  Celulares
+                </Dropdown.Item>
+                <Dropdown.Item href="/category/tablets">Tablets</Dropdown.Item>
+
+                <Dropdown.Item href="/category/televisores">
+                  Televisores
+                </Dropdown.Item>
+              </DropdownButton>
+              {user && user.email === "alejandro_1031m@hotmail.com" && (
+                <Link to={"/admin"} className="ms-3 mt-2">
+                  <Button variant="outline-dark">ADMIN</Button>
+                </Link>
+              )}
+              <LoginConatiner />
             </Nav>
           </Navbar.Collapse>
-          {user && user.email === "alejandro_1031m@hotmail.com" && (
-            <Link to={"/admin"}>ADMIN</Link>
-          )}
+          <Link to={"/cart"}>
+            <CartWidget />
+          </Link>
         </Container>
-        <LoginConatiner />
-        <Link to={"/cart"}>
-          <CartWidget />
-        </Link>
       </Navbar>
     </>
   );

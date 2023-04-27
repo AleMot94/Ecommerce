@@ -16,7 +16,7 @@ import Home from "./componentes/Home/Home";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-dark-subtle">
       <CartProvider>
         <LoginProvider>
           <BrowserRouter>

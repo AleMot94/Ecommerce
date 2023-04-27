@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import LoginContext from "../../context/LoginContext";
 import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 const LoginConatiner = () => {
   const { user, loading, logout } = useContext(LoginContext);
@@ -12,18 +13,36 @@ const LoginConatiner = () => {
   if (loading) return <h1>loading</h1>;
 
   return (
-    <ul>
-      <li>
+    <div className="ms-5">
+      <div>
         {user ? (
-          <button onClick={handleLogout}>logout</button>
+          <Button
+            variant="outline-dark"
+            className="fs-6"
+            onClick={handleLogout}
+          >
+            logout
+          </Button>
         ) : (
-          <Link to={"/login"}>longin</Link>
+          <Link to={"/login"}>
+            <Button variant="outline-dark" className="fs-6">
+              longin
+            </Button>
+          </Link>
         )}
-      </li>
-      <li>
-        <Link to={"/register"}>register</Link>
-      </li>
-    </ul>
+      </div>
+      <div>
+        {user ? (
+          <p className="fs-6">{user.email.split("@", 1)}</p>
+        ) : (
+          <Link to={"/register"}>
+            <Button variant="outline-dark" className="fs-6">
+              register
+            </Button>
+          </Link>
+        )}
+      </div>
+    </div>
   );
 };
 
