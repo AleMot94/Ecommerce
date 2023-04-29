@@ -25,11 +25,11 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route
                 path="/todos"
-                element={<ItemListContainer titulo="ECOMMERCE" />}
+                element={<ItemListContainer titulo="Todo-Pantalla" />}
               />
               <Route
                 path="/category/:categoryid"
-                element={<ItemListContainer titulo="ECOMMERCE" />}
+                element={<ItemListContainer titulo="Todo-Pantalla" />}
               />
               <Route
                 path="/detail/:productid"

@@ -5,11 +5,13 @@ const CartDeatil = ({ id, name, price, cantidad }) => {
   const { remuve } = useContext(CartContext);
   return (
     <>
-      <li>id :{id}</li>
-      <li>producto :{name}</li>
-      <li>cantidad :{cantidad}</li>
-      <li>precio :{price}</li>
-      <li>subtotal :{price * cantidad}</li>
+      <div>
+        <div>producto :{name}</div>
+        <div>cantidad :{cantidad}</div>
+        <div>precio :{price}</div>
+        <div>subtotal :{price * cantidad}</div>
+      </div>
+
       <button
         onClick={() => {
           remuve(id);

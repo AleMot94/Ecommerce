@@ -8,51 +8,82 @@ import { useContext } from "react";
 import LoginContext from "../../context/LoginContext";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
 
 const NavBarComp = () => {
   const { user } = useContext(LoginContext);
 
   return (
     <>
-      <Navbar bg="warning" expand="lg">
+      <Navbar bg="warning" expand="lg" className="fw-bold pt-1">
         <Container>
-          <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+          <Link className="text-decoration-none text-black mt-2 me-2" to="/">
+            Todo-Pantalla
+          </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/">
-                <Button variant="outline-dark">Home</Button>
-              </Nav.Link>
-              <Nav.Link href="/contacto">
-                <Button variant="outline-dark">Contacto</Button>
-              </Nav.Link>
-              <DropdownButton
-                id="dropdown-button-dark-example2"
-                variant="outline-dark"
-                menuVariant="dark"
-                title="Productos"
-                className="mt-2"
-              >
-                <Dropdown.Item href="/todos">Todos</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item href="/category/celulares">
-                  Celulares
-                </Dropdown.Item>
-                <Dropdown.Item href="/category/tablets">Tablets</Dropdown.Item>
+              <Link to="/">
+                <Button variant="outline-dark" className="fw-bold mt-2 mx-2">
+                  Home
+                </Button>
+              </Link>
+              <Link to="/contacto">
+                <Button variant="outline-dark" className="fw-bold mt-2 mx-2">
+                  Contacto
+                </Button>
+              </Link>
 
-                <Dropdown.Item href="/category/televisores">
-                  Televisores
-                </Dropdown.Item>
-              </DropdownButton>
+              <Dropdown className="mx-2">
+                <Dropdown.Toggle
+                  id="dropdown-button-dark-example1"
+                  variant="outline-dark"
+                  className="fw-bold mt-2"
+                >
+                  Productos
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu variant="dark" className=" text-center">
+                  <Link
+                    to="/todos"
+                    className="text-light fw-bold text-decoration-none"
+                  >
+                    Todos
+                  </Link>
+                  <Dropdown.Divider />
+                  <div className="d-flex flex-column">
+                    <Link
+                      to="/category/celulares"
+                      className="text-light fw-bold text-decoration-none"
+                    >
+                      Celulares
+                    </Link>
+                    <Link
+                      to="/category/tablets"
+                      className="text-light fw-bold text-decoration-none"
+                    >
+                      Tablets
+                    </Link>
+
+                    <Link
+                      to="/category/televisores"
+                      className="text-light fw-bold text-decoration-none"
+                    >
+                      Televisores
+                    </Link>
+                  </div>
+                </Dropdown.Menu>
+              </Dropdown>
+
               {user && user.email === "alejandro_1031m@hotmail.com" && (
                 <Link to={"/admin"} className="ms-3 mt-2">
-                  <Button variant="outline-dark">ADMIN</Button>
+                  <Button variant="outline-dark" className="fw-bold">
+                    ADMIN
+                  </Button>
                 </Link>
               )}
-              <LoginConatiner />
             </Nav>
           </Navbar.Collapse>
+          <LoginConatiner />
           <Link to={"/cart"}>
             <CartWidget />
           </Link>

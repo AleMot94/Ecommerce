@@ -13,19 +13,23 @@ const LoginConatiner = () => {
   if (loading) return <h1>loading</h1>;
 
   return (
-    <div className="ms-5">
+    <div className="d-flex flex-row me-3">
       <div>
         {user ? (
           <Button
             variant="outline-dark"
-            className="fs-6"
+            className="fw-bold"
             onClick={handleLogout}
           >
             logout
           </Button>
         ) : (
           <Link to={"/login"}>
-            <Button variant="outline-dark" className="fs-6">
+            <Button
+              variant="outline-dark"
+              className="fw-bold me-1"
+              style={{ height: "37px" }}
+            >
               longin
             </Button>
           </Link>
@@ -33,10 +37,14 @@ const LoginConatiner = () => {
       </div>
       <div>
         {user ? (
-          <p className="fs-6">{user.email.split("@", 1)}</p>
+          <p className="fw-bold">{user.email.split("@", 1)}</p>
         ) : (
           <Link to={"/register"}>
-            <Button variant="outline-dark" className="fs-6">
+            <Button
+              variant="outline-dark"
+              className="fw-bold"
+              style={{ height: "37px" }}
+            >
               register
             </Button>
           </Link>

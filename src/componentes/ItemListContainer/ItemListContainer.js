@@ -21,13 +21,13 @@ const ItemListContainer = (props) => {
   }
 
   return (
-    <div>
-      <h1>{props.titulo}</h1>
+    <div style={{ height: "100vh", overflow: "scroll" }}>
+      <h1 className="fw-bold">{props.titulo}</h1>
 
       {data.length > 0 ? (
         <ItemList products={data} />
       ) : (
-        <h1>No hay productos</h1>
+        <h1 className="fw-bold">No hay productos</h1>
       )}
     </div>
   );

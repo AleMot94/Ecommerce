@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
 
 const CounterCart = ({ stock, onAdd }) => {
   const [count, setCount] = useState(0);
@@ -19,18 +20,24 @@ const CounterCart = ({ stock, onAdd }) => {
 
   return (
     <>
-      <div>
-        <button onClick={subtraction}>-</button>
+      <div class="d-flex justify-content-around">
+        <Button className="ms-4" variant="secondary" onClick={subtraction}>
+          -
+        </Button>
         <h5>{count}</h5>
-        <button onClick={Add}>+</button>
+        <Button className="me-4" variant="secondary" onClick={Add}>
+          +
+        </Button>
       </div>
-      <button
+      <Button
+        className="mt-2"
+        variant="success"
         onClick={() => {
           onAdd(count);
         }}
       >
         agregar al carrito
-      </button>
+      </Button>
     </>
   );
 };

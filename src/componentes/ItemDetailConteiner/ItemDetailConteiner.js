@@ -23,7 +23,7 @@ const ItemDetailConteiner = () => {
 
   return (
     <>
-      <h1>detalle del producto</h1>
+      <h1 className="fw-bold">Detalle del producto</h1>
       {dataKeys.length > 0 ? (
         <ItemDetail {...data} />
       ) : (
