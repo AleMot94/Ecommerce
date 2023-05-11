@@ -85,7 +85,7 @@ const Checkout = () => {
         <label htmlFor="name">Nombre</label>
         <input
           id="name"
-          type="terxt"
+          type="text"
           name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -94,7 +94,7 @@ const Checkout = () => {
         <label htmlFor="surname">Apellido</label>
         <input
           id="surname"
-          type="terxt"
+          type="text"
           name="surname"
           value={surname}
           onChange={(e) => setSurname(e.target.value)}

@@ -4,7 +4,7 @@ import Button from "react-bootstrap/esm/Button";
 const Home = () => {
   return (
     <div>
-      <h1>Todo-Pantalla</h1>
+      <h1 className="fw-bold">Todo-Pantalla</h1>
       <Carousel>
         <Carousel.Item>
           <img
