@@ -18,7 +18,7 @@ const LoginConatiner = () => {
         {user ? (
           <Button
             variant="outline-dark"
-            className="fw-bold"
+            className="fw-bold me-2 mt-2"
             onClick={handleLogout}
           >
             logout
@@ -37,7 +37,7 @@ const LoginConatiner = () => {
       </div>
       <div>
         {user ? (
-          <p className="fw-bold">{user.email.split("@", 1)}</p>
+          <p className="fw-bold mt-2">{user.email.split("@", 1)}</p>
         ) : (
           <Link to={"/register"}>
             <Button

@@ -10,9 +10,11 @@ import {
   documentId,
 } from "firebase/firestore";
 import { bd } from "../../service/firebase";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const Checkout = () => {
-  const { cart, totalPrice } = useContext(CartContext);
+  const { cart, totalPrice, cleanCart } = useContext(CartContext);
 
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
@@ -20,7 +22,8 @@ const Checkout = () => {
   const [direccion, setDireccion] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleObjOrder = () => {
+  const handleObjOrder = (e) => {
+    e.preventDefault();
     console.log("generar orden de compra");
     const total = totalPrice();
     const objOrder = {
@@ -65,9 +68,15 @@ const Checkout = () => {
           });
         }
       })
-      .then(({ id }) => {
+      .then(() => {
         batch.commit();
-        console.log(id);
+
+        cleanCart();
+        setName("");
+        setSurname("");
+        setTelefono("");
+        setDireccion("");
+        setEmail("");
       })
       .catch((error) => {
         if (error.type === "fuera_de_stock") {
@@ -80,57 +89,64 @@ const Checkout = () => {
 
   return (
     <div>
-      <h1>FORMULARIO</h1>
-      <form>
-        <label htmlFor="name">Nombre</label>
-        <input
-          id="name"
-          type="text"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+      <div style={{ height: "100vh", overflow: "scroll" }}>
+        <h1 className="fw-bold">FORMULARIO</h1>
 
-        <label htmlFor="surname">Apellido</label>
-        <input
-          id="surname"
-          type="text"
-          name="surname"
-          value={surname}
-          onChange={(e) => setSurname(e.target.value)}
-        />
+        <Form className="container fw-bold">
+          <Form.Group className="mb-3 d-flex flex-column align-items-start">
+            <Form.Label>Nombre</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="ingrese su nombre"
+              value={telefono}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Form.Group>
 
-        <label htmlFor="telefono">telefono</label>
-        <input
-          id="telefono"
-          type="tel"
-          name="telefono"
-          value={telefono}
-          onChange={(e) => setTelefono(e.target.value)}
-        />
+          <Form.Group className="mb-3 d-flex flex-column align-items-start">
+            <Form.Label>Apellido</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="ingrese su apellido"
+              value={surname}
+              onChange={(e) => setSurname(e.target.value)}
+            />
+          </Form.Group>
 
-        <label htmlFor="direccion">Direccion</label>
-        <input
-          id="direccion"
-          type="tel"
-          name="direccion"
-          value={direccion}
-          onChange={(e) => setDireccion(e.target.value)}
-        />
+          <Form.Group className="mb-3 d-flex flex-column align-items-start">
+            <Form.Label>Telefono</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="ingrese su telefono"
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
+            />
+          </Form.Group>
 
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+          <Form.Group className="mb-3 d-flex flex-column align-items-start">
+            <Form.Label>Direccion</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="ingrese calle y numero"
+              value={direccion}
+              onChange={(e) => setDireccion(e.target.value)}
+            />
+          </Form.Group>
 
-        <input type="submit" onChange={handleObjOrder}></input>
-      </form>
-
-      <button onClick={handleObjOrder}>comprar</button>
+          <Form.Group className="mb-3 d-flex flex-column align-items-start">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="ingrese su email, por ejemplo: algunmail@hotmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Form.Group>
+          <Button variant="success" onClick={handleObjOrder}>
+            Comprar
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 };
