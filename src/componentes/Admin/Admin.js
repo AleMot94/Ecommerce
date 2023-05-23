@@ -2,6 +2,8 @@ import { collection, addDoc } from "firebase/firestore";
 import { bd, storage } from "../../service/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import ItemAdminContainer from "../ItemAdminContainer/ItemAdminContainer";
 
 const Admin = () => {
@@ -24,12 +26,12 @@ const Admin = () => {
       stock,
     });
 
-    e.target.name.value = "";
-    e.target.price.value = "";
-    e.target.img.value = "";
-    e.target.category.value = "";
-    e.target.description.value = "";
-    e.target.stock.value = "";
+    setName("");
+    setPrice("");
+    setImg("");
+    setCategory("");
+    setDescription("");
+    setStock("");
   };
 
   const addImgFireStorage = async (e) => {
@@ -43,61 +45,72 @@ const Admin = () => {
   return (
     <>
       <h1>cargar productos</h1>
-      <form onSubmit={addProdFirebase}>
-        <label htmlFor="name">nombre</label>
-        <input
-          name="name"
-          type="text"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        ></input>
 
-        <label htmlFor="price">precio</label>
-        <input
-          name="price"
-          type="number"
-          id="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        ></input>
+      <Form className="container fw-bold">
+        <Form.Group className="mb-3 d-flex flex-column align-items-start">
+          <Form.Label>Nombre del producto</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="ingrese el titulo de su producto"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </Form.Group>
 
-        <label htmlFor="img">imagen del producto</label>
-        <input
-          name="img"
-          type="file"
-          id="img"
-          onChange={addImgFireStorage}
-        ></input>
+        <Form.Group className="mb-3 d-flex flex-column align-items-start">
+          <Form.Label>Precio</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="ingrese el precio"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </Form.Group>
 
-        <label htmlFor="category">categoria</label>
-        <input
-          name="category"
-          type="text"
-          id="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        ></input>
+        <Form.Group className="mb-3 d-flex flex-column align-items-start">
+          <Form.Label>Ingrese una imagen</Form.Label>
+          <Form.Control
+            type="file"
+            placeholder="ingrese una imagen del producto"
+            onChange={addImgFireStorage}
+          />
+        </Form.Group>
 
-        <label htmlFor="description">descripcion</label>
-        <input
-          name="description"
-          type="text"
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></input>
+        <Form.Group className="mb-3 d-flex flex-column align-items-start">
+          <Form.Label>Categoria</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="categoria del producto"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          />
+        </Form.Group>
 
-        <label htmlFor="stock">stock</label>
-        <input
-          name="stock"
-          type="number"
-          id="stock"
-          value={stock}
-          onChange={(e) => setStock(e.target.value)}
-        ></input>
-        <button>agregar producto</button>
-      </form>
+        <Form.Group className="mb-3 d-flex flex-column align-items-start">
+          <Form.Label>Descripcion</Form.Label>
+          <Form.Control
+            as={"textarea"}
+            type="text"
+            placeholder="ingrese una descripcion del producto"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3 d-flex flex-column align-items-start">
+          <Form.Label>Stock</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="ingrese cantidad en stock"
+            value={stock}
+            onChange={(e) => setStock(e.target.value)}
+          />
+        </Form.Group>
+
+        <Button variant="success" onClick={addProdFirebase}>
+          Cargar Productos
+        </Button>
+      </Form>
 
       <ItemAdminContainer />
     </>

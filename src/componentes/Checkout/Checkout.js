@@ -10,11 +10,14 @@ import {
   documentId,
 } from "firebase/firestore";
 import { bd } from "../../service/firebase";
+import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 const Checkout = () => {
   const { cart, totalPrice, cleanCart } = useContext(CartContext);
+  const [modalShow, setModalShow] = useState(false);
 
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
@@ -70,6 +73,7 @@ const Checkout = () => {
       })
       .then(() => {
         batch.commit();
+        setModalShow(true);
 
         cleanCart();
         setName("");
@@ -87,6 +91,37 @@ const Checkout = () => {
       });
   };
 
+  function MyVerticallyCenteredModal(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header
+          className="bg-dark text-emphasis-primary text-light"
+          closeButton
+        >
+          <Modal.Title id="contained-modal-title-vcenter">
+            Gracias por su compra
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h4 className="bg-success-subtle">Confirmacion de compra</h4>
+          <p>le llegara a su mail, su factura de compra</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Link to="/">
+            <Button variant="success" onClick={props.onHide}>
+              Finalizar
+            </Button>
+          </Link>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+
   return (
     <div>
       <div style={{ height: "100vh", overflow: "scroll" }}>
@@ -98,7 +133,7 @@ const Checkout = () => {
             <Form.Control
               type="text"
               placeholder="ingrese su nombre"
-              value={telefono}
+              value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </Form.Group>
@@ -146,6 +181,10 @@ const Checkout = () => {
             Comprar
           </Button>
         </Form>
+        <MyVerticallyCenteredModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
       </div>
     </div>
   );
