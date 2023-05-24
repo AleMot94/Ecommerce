@@ -124,7 +124,7 @@ const Checkout = () => {
 
   return (
     <div>
-      <div style={{ height: "100vh", overflow: "scroll" }}>
+      <div>
         <h1 className="fw-bold">FORMULARIO</h1>
 
         <Form className="container fw-bold">

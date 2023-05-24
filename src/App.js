@@ -13,6 +13,7 @@ import Admin from "./componentes/Admin/Admin";
 import ProtectedRoute from "./componentes/ProtectedRoute/ProtectedRoute";
 import Modificar from "./componentes/Modificar/Modificar";
 import Home from "./componentes/Home/Home";
+import ContactForm from "./componentes/ContactForm/ContactForm";
 import Footer from "./componentes/Footer/Footer";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <div className="flex-grow-1">
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/contacto" element={<ContactForm />} />
                 <Route
                   path="/todos"
                   element={<ItemListContainer titulo="Todo-Pantalla" />}

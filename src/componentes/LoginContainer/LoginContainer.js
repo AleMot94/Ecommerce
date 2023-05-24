@@ -39,7 +39,7 @@ const LoginConatiner = () => {
       </div>
       <div>
         {user ? (
-          <p className="fw-bold mt-2">{user.email.split("@", 1)}</p>
+          <p className="fw-bold mt-3">{user.email.split("@", 1)}</p>
         ) : (
           <Link to={"/register"}>
             <Button

@@ -1,5 +1,6 @@
 import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/esm/Button";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -20,9 +21,11 @@ const Home = () => {
             alt="First slide"
           />
           <Carousel.Caption>
-            <Button variant="dark">
-              <h3 className="fw-bold">CELULARES</h3>
-            </Button>
+            <Link to="/category/celulares">
+              <Button variant="dark">
+                <h3 className="fw-bold">CELULARES</h3>
+              </Button>
+            </Link>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -40,9 +43,11 @@ const Home = () => {
           />
 
           <Carousel.Caption>
-            <Button variant="dark">
-              <h3 className="fw-bold">TABLETS</h3>
-            </Button>
+            <Link to="/category/tablets">
+              <Button variant="dark">
+                <h3 className="fw-bold">TABLETS</h3>
+              </Button>
+            </Link>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -60,9 +65,11 @@ const Home = () => {
           />
 
           <Carousel.Caption>
-            <Button variant="dark">
-              <h3 className="fw-bold">TELEVISORES</h3>
-            </Button>
+            <Link to="/category/televisores">
+              <Button variant="dark">
+                <h3 className="fw-bold">TELEVISORES</h3>
+              </Button>
+            </Link>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

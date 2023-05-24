@@ -15,8 +15,6 @@ const Admin = () => {
   const [img, setImg] = useState("");
 
   const addProdFirebase = async (e) => {
-    console.log(" se ejecuto la funcion");
-    e.preventDefault();
     await addDoc(collection(bd, "products"), {
       name,
       price,
