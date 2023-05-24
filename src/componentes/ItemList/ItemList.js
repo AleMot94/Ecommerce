@@ -1,5 +1,4 @@
 import CardProd from "../CardProd/CardProd";
-import "./ItemList.css";
 
 const ItemList = ({ products }) => {
   return (

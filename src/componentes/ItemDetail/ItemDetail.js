@@ -5,13 +5,11 @@ import { useContext, useState } from "react";
 import CartContext from "../../context/CartContext";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import "./ItemDetail.css";
 
 const ItemDetail = ({ id, name, img, price, category, stock, description }) => {
   const { addItem } = useContext(CartContext);
   const [quantityAdded, setQuantityAdded] = useState(0);
 
-  // agrega el producto al carrito y va contando la cantidad de productos en el carrito
   const handleOnAdd = (cantidad) => {
     addItem({ id, name, price, cantidad });
     setQuantityAdded(cantidad);

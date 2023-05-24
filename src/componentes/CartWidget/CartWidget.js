@@ -1,4 +1,3 @@
-import "./CartWidget.css";
 import { useContext } from "react";
 import CartContext from "../../context/CartContext";
 import Badge from "react-bootstrap/Badge";

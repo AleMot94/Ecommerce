@@ -4,14 +4,12 @@ import Button from "react-bootstrap/Button";
 const CounterCart = ({ stock, onAdd }) => {
   const [count, setCount] = useState(0);
 
-  // resta 1 en el contador
   const subtraction = () => {
     if (count > 0) {
       setCount(count - 1);
     }
   };
 
-  //suma 1 en el contador
   const Add = () => {
     if (count < stock) {
       setCount(count + 1);
