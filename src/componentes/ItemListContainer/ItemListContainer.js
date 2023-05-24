@@ -21,7 +21,7 @@ const ItemListContainer = (props) => {
   }
 
   return (
-    <div style={{ height: "100vh", overflow: "scroll" }}>
+    <div>
       <h1 className="fw-bold">{props.titulo}</h1>
 
       {data.length > 0 ? (

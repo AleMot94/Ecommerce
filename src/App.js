@@ -13,42 +13,46 @@ import Admin from "./componentes/Admin/Admin";
 import ProtectedRoute from "./componentes/ProtectedRoute/ProtectedRoute";
 import Modificar from "./componentes/Modificar/Modificar";
 import Home from "./componentes/Home/Home";
+import Footer from "./componentes/Footer/Footer";
 
 function App() {
   return (
-    <div className="App bg-dark-subtle">
+    <div className="App bg-dark-subtle d-flex flex-column min-vh-100">
       <CartProvider>
         <LoginProvider>
           <BrowserRouter>
             <NavBarComp />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route
-                path="/todos"
-                element={<ItemListContainer titulo="Todo-Pantalla" />}
-              />
-              <Route
-                path="/category/:categoryid"
-                element={<ItemListContainer titulo="Todo-Pantalla" />}
-              />
-              <Route
-                path="/detail/:productid"
-                element={<ItemDetailConteiner />}
-              />
-              <Route path="/cart" element={<CartList />}></Route>
-              <Route path="/checkout" element={<Checkout />}></Route>
-              <Route path="/login" element={<Login />}></Route>
-              <Route path="/register" element={<Register />}></Route>
-              <Route
-                path="/admin"
-                element={
-                  <ProtectedRoute>
-                    <Admin />
-                  </ProtectedRoute>
-                }
-              ></Route>
-              <Route path="/modificar" element={<Modificar />}></Route>
-            </Routes>
+            <div className="flex-grow-1">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route
+                  path="/todos"
+                  element={<ItemListContainer titulo="Todo-Pantalla" />}
+                />
+                <Route
+                  path="/category/:categoryid"
+                  element={<ItemListContainer titulo="Todo-Pantalla" />}
+                />
+                <Route
+                  path="/detail/:productid"
+                  element={<ItemDetailConteiner />}
+                />
+                <Route path="/cart" element={<CartList />}></Route>
+                <Route path="/checkout" element={<Checkout />}></Route>
+                <Route path="/login" element={<Login />}></Route>
+                <Route path="/register" element={<Register />}></Route>
+                <Route
+                  path="/admin"
+                  element={
+                    <ProtectedRoute>
+                      <Admin />
+                    </ProtectedRoute>
+                  }
+                ></Route>
+                <Route path="/modificar" element={<Modificar />}></Route>
+              </Routes>
+            </div>
+            <Footer className="mt-auto" />
           </BrowserRouter>
         </LoginProvider>
       </CartProvider>

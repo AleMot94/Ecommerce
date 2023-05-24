@@ -14,10 +14,7 @@ const CartList = () => {
 
   return (
     <div>
-      <div
-        className="d-flex flex-column align-items-center"
-        style={{ height: "100vh" }}
-      >
+      <div className="d-flex flex-column align-items-center">
         <h1 className="fw-bold">carrito de compras</h1>
 
         {cart.map((prod) => {

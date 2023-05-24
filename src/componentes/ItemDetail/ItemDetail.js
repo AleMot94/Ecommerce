@@ -19,8 +19,8 @@ const ItemDetail = ({ id, name, img, price, category, stock, description }) => {
 
   return (
     <>
-      <div style={{ height: "100vh", overflow: "scroll" }}>
-        <div className="d-block d-sm-none">
+      <div>
+        <div className="d-block d-sm-none  ">
           <div className="d-flex justify-content-center fw-bold">
             <Card style={{ width: "17rem" }}>
               <Card.Img variant="top" src={img} />

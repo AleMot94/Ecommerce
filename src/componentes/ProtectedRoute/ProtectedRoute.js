@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children }) => {
     try {
       throw new Error("User not authorized");
     } catch (error) {
-      console.error(error);
+      alert(error);
       return <Navigate to="/" />;
     }
   }

@@ -1,13 +1,15 @@
 import { useContext } from "react";
 import LoginContext from "../../context/LoginContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 const LoginConatiner = () => {
   const { user, loading, logout } = useContext(LoginContext);
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     await logout();
+    navigate("/");
   };
 
   if (loading) return <h1>loading</h1>;

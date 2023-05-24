@@ -39,37 +39,49 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <Form className="mx-5 px-5 bg-warning rounded-4">
-        <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-          <Form.Label column sm="2">
-            Email
-          </Form.Label>
-          <Col sm="8">
-            <Form.Control
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Col>
-        </Form.Group>
+    <div className="pt-5">
+      <div className="d-flex justify-content-center mt-5 pt-5 ">
+        <Form className="mx-5 px-5 bg-warning rounded-4 pt-3 w-50">
+          <Form.Group
+            as={Row}
+            className="mb-3 mt-4"
+            controlId="formPlaintextEmail"
+          >
+            <Form.Label column sm="2">
+              Email
+            </Form.Label>
+            <Col sm="8">
+              <Form.Control
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Col>
+          </Form.Group>
 
-        <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-          <Form.Label column sm="2">
-            Password
-          </Form.Label>
-          <Col sm="8">
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Col>
-          {error && <p className="mb-3">{error}</p>}
-        </Form.Group>
-        <Button onClick={handleSubmit}>Registrar</Button>
-      </Form>
+          <Form.Group
+            as={Row}
+            className="mb-3"
+            controlId="formPlaintextPassword"
+          >
+            <Form.Label column sm="2">
+              Password
+            </Form.Label>
+            <Col sm="8">
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Col>
+            {error && <p className="mb-3">{error}</p>}
+          </Form.Group>
+          <Button className="mb-3" variant="light" onClick={handleSubmit}>
+            Registrar
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 };
